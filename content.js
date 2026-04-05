@@ -75,15 +75,20 @@ function replace_word_fragments(translated_word_list, node_info) {
   });
 }
 
-function flood_text() {
-  const type = "word";
-  const proba = 0.05;
+async function flood_text() {
   const batch_size = 50;
 
   let nodes = map_dom();
   let text_list = [];
   let node_info = [];
   let batches = [];
+
+  const settings = await browser.storage.local.get({
+    percentageSliderValue: "10",
+    translationScopeValue: "word",
+  });
+  const proba = settings.percentageSliderValue;
+  const type = settings.translationScopeValue;
 
   if (type == "word") [text_list, node_info] = create_word_list(nodes, proba);
   else if (type == "sentence")
