@@ -77,16 +77,15 @@ function replace_word_fragments(translated_word_list, node_info) {
 
 function flood_text() {
   const type = "word";
-  const proba = 0.1;
-  const batch_size = 10;
+  const proba = 0.05;
+  const batch_size = 50;
 
   let nodes = map_dom();
   let text_list = [];
   let node_info = [];
   let batches = [];
 
-  if (type == "word")
-    [text_list, node_info] = create_word_list(nodes, proba);
+  if (type == "word") [text_list, node_info] = create_word_list(nodes, proba);
   else if (type == "sentence")
     // TODO
     console.log("NOT IMPLEMENTED");
