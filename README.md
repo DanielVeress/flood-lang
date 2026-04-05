@@ -10,12 +10,13 @@ The motivation was simple. You can easily translate whole websites, or parts of 
 
 - Automatic word translation
 - Languages
+- Translation highlight and hover-over functionality to look at original words
+- Save and delete original text and translation
 
 ### Planned Features
 
 - Anki export
 - Setting your own API key in the extension
-- Translation highlight and hover-over functionality to look at original words
 - More languages
 - LLM API translation for better results
 - Sentence scoped translation

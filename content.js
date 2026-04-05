@@ -73,7 +73,10 @@ function replace_word_fragments(translated_word_list, node_info) {
           const newPair = { original, translation };
           const data = await browser.storage.local.get({ vocabList: [] });
           const currentList = data.vocabList;
-          if (!currentList.includes(newPair)) {
+          const isDuplicate = currentList.some(
+            (item) => item.original === newPair.original,
+          );
+          if (!isDuplicate) {
             currentList.push(newPair);
             await browser.storage.local.set({ vocabList: currentList });
             console.log("Saved:", newPair);

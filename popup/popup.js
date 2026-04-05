@@ -26,12 +26,31 @@ browser.storage.local
   });
 
 function updateUI(textList) {
+  vocabList.innerHTML = "";
+
   if (textList.length === 0) {
     vocabList.appendChild(document.createTextNode("No words saved yet!"));
   } else {
     textList.forEach((item) => {
       const li = document.createElement("li");
-      li.textContent = `${item.original} - ${item.translation}`;
+
+      const span = document.createElement("span");
+      span.textContent = `${item.original} - ${item.translation}`;
+
+      const delButton = document.createElement("button");
+      delButton.textContent = "X";
+      delButton.addEventListener("click", () => {
+        const index = textList.indexOf(item);
+        if (index > -1) {
+          textList.splice(index, 1);
+          browser.storage.local.set({ vocabList: textList });
+          li.remove();
+          updateUI(textList);
+        }
+      });
+
+      li.appendChild(span);
+      li.appendChild(delButton);
       vocabList.appendChild(li);
     });
   }

@@ -37,7 +37,7 @@ async function translate(request, sendResponse) {
   try {
     for (let i = 0; i < batches.length; i++) {
       switch (translation_method) {
-        case "googl":
+        case "google":
           const response = await fetch_from_google(batches[i], target_lang);
           const response_json = await response.json();
           translated_text_list = [
