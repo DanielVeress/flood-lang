@@ -104,7 +104,7 @@ async function flood_text() {
     percentageSliderValue: "10",
     translationScopeValue: "word",
   });
-  const proba = settings.percentageSliderValue;
+  const proba = settings.percentageSliderValue / 100;
   const type = settings.translationScopeValue;
 
   if (type == "word") [text_list, node_info] = create_word_list(nodes, proba);
