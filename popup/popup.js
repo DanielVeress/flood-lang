@@ -1,6 +1,3 @@
-const toggleBtn = document.getElementById("toggle-view-btn");
-const recentView = document.getElementById("recent-view");
-const settingsView = document.getElementById("settings-view");
 const percentageSlider = document.getElementById("percentage-slider");
 const percentageDisplay = document.getElementById("percentage-display");
 const translationScope = document.getElementById("translation-scope");
@@ -65,10 +62,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 // Listeners
-toggleBtn.addEventListener("click", () => {
-  recentView.classList.toggle("hidden");
-  settingsView.classList.toggle("hidden");
-});
 percentageSlider.addEventListener("input", () => {
   percentageDisplay.textContent = `${percentageSlider.value}%`;
   browser.storage.local.set({ percentageSliderValue: percentageSlider.value });

@@ -1,61 +1,62 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="popup.css" />
+    <link rel="stylesheet" href="css/main.css" />
     <script src="popup.js" defer></script>
   </head>
 
   <body>
+    <input type="checkbox" id="view-toggle" />
+
     <div id="header">
-      <h1>FloodLang</h1>
-      <button id="toggle-view-btn">
+      <h1><span class="title-flood">Flood</span><span class="title-lang">Lang</span></h1>
+      <label for="view-toggle">
         <img src="../assets/freepik_gear.png" alt="Settings" width="24px" />
-      </button>
+      </label>
     </div>
 
-    <div id="recent-view">
-      <h2>Recent Translations</h2>
-      <ul id="vocab-list"></ul>
-      <button id="clear-vocab">Clear All</button>
-    </div>
-
-    <div id="settings-view" class="hidden">
-      <h2>Settings</h2>
-
-      <div class="setting-item">
-        <label for="percentage-slider">Translation percentage:</label>
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value="10"
-          id="percentage-slider"
-        />
-        <span id="percentage-display">10%</span>
+    <div id="views">
+      <div id="recent-view">
+        <ul id="vocab-list"></ul>
+        <button id="clear-vocab">Clear All</button>
       </div>
 
-      <div class="setting-item">
-        <label for="translation-scope">Scope:</label>
-        <select id="translation-scope">
-          <option value="word">Words</option>
-          <option value="sentence">Sentences</option>
-        </select>
-      </div>
+      <div id="settings-view">
+        <div class="setting-item">
+          <label for="percentage-slider">Translation percentage:</label>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value="10"
+            id="percentage-slider"
+          />
+          <span id="percentage-display">10%</span>
+        </div>
 
-      <div class="setting-item">
-        <label for="target-lang">Language:</label>
-        <select id="target-lang">
-          <option value="es">Spanish</option>
-          <option value="sv">Swedish</option>
-          <option value="fr">French</option>
-        </select>
-      </div>
+        <div class="setting-item">
+          <label for="translation-scope">Scope:</label>
+          <select id="translation-scope">
+            <option value="word">Words</option>
+            <option value="sentence">Sentences</option>
+          </select>
+        </div>
 
-      <div class="setting-item">
-        <label for="translation-method">Method:</label>
-        <select id="translation-method">
-          <option value="google">Google Translate</option>
-        </select>
+        <div class="setting-item">
+          <label for="target-lang">Language:</label>
+          <select id="target-lang">
+            <option value="es">Spanish</option>
+            <option value="sv">Swedish</option>
+            <option value="fr">French</option>
+          </select>
+        </div>
+
+        <div class="setting-item">
+          <label for="translation-method">Method:</label>
+          <select id="translation-method">
+            <option value="google">Google Translate</option>
+          </select>
+        </div>
       </div>
     </div>
   </body>
