@@ -71,3 +71,14 @@ function flood_text(text_node_list) {
 
 const text_node_list = map_web_page();
 flood_text(text_node_list);
+
+console.log("sent message");
+let promise = browser.runtime.sendMessage({ message: "flood_text" });
+promise.then(
+  (response) => {
+    console.log("Response: " + response);
+  },
+  (error) => {
+    console.log("Error: " + error);
+  },
+);
