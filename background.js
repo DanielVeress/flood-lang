@@ -1,8 +1,5 @@
 import { GOOGLE_API_KEY } from "./config.js";
 
-const ACTIVE_ENGINE = "google";
-const TARGET_LANG = "sv";
-
 async function fetch_from_google(batch, target_lang) {
   const url = `https://translation.googleapis.com/language/translate/v2?key=${GOOGLE_API_KEY}`;
 
@@ -30,17 +27,29 @@ async function translate(request, sendResponse) {
   let batches = request["batches"];
   let translated_text_list = [];
 
-  for (let i = 0; i < batches.length; i++) {
-    switch (ACTIVE_ENGINE) {
-      case "googl":
-        const response = await fetch_from_google(batches[i], TARGET_LANG);
-        const response_json = await response.json();
-        translated_text_list = [
-          ...translated_text_list,
-          ...process_from_google(response_json),
-        ];
-        break;
+  let settings = await browser.storage.local.get({
+    targetLangValue: "es",
+    translationMethodValue: "google",
+  });
+  let target_lang = settings.targetLangValue;
+  let translation_method = settings.translationMethodValue;
+
+  try {
+    for (let i = 0; i < batches.length; i++) {
+      switch (translation_method) {
+        case "googl":
+          const response = await fetch_from_google(batches[i], target_lang);
+          const response_json = await response.json();
+          translated_text_list = [
+            ...translated_text_list,
+            ...process_from_google(response_json),
+          ];
+          break;
+      }
     }
+  } catch (error) {
+    console.log(error);
+    sendResponse({ translated_text_list: translated_text_list });
   }
 
   sendResponse({ translated_text_list: translated_text_list });
