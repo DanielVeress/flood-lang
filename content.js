@@ -65,6 +65,20 @@ function replace_word_fragments(translated_word_list, node_info) {
         const span = document.createElement("span");
         span.textContent = replacements.get(idx);
         span.style.color = "red";
+        span.dataset.original = word;
+        span.title = word;
+        span.addEventListener("mouseenter", async () => {
+          const original = span.dataset.original;
+          const translation = span.textContent;
+          const newPair = { original, translation };
+          const data = await browser.storage.local.get({ vocabList: [] });
+          const currentList = data.vocabList;
+          if (!currentList.includes(newPair)) {
+            currentList.push(newPair);
+            await browser.storage.local.set({ vocabList: currentList });
+            console.log("Saved:", newPair);
+          }
+        });
         fragment.appendChild(span);
       } else {
         fragment.appendChild(document.createTextNode(word));

@@ -6,6 +6,8 @@ const percentageDisplay = document.getElementById("percentage-display");
 const translationScope = document.getElementById("translation-scope");
 const targetLang = document.getElementById("target-lang");
 const translationMethod = document.getElementById("translation-method");
+const vocabList = document.getElementById("vocab-list");
+const clearVocabBtn = document.getElementById("clear-vocab");
 
 // Load from storage
 browser.storage.local
@@ -22,6 +24,26 @@ browser.storage.local
     targetLang.value = result.targetLangValue;
     translationMethod.value = result.translationMethodValue;
   });
+
+function updateUI(textList) {
+  if (textList.length === 0) {
+    vocabList.appendChild(document.createTextNode("No words saved yet!"));
+  } else {
+    textList.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = `${item.original} - ${item.translation}`;
+      vocabList.appendChild(li);
+    });
+  }
+}
+
+// Load vocab list
+document.addEventListener("DOMContentLoaded", async () => {
+  const data = await browser.storage.local.get({ vocabList: [] });
+  const textList = data.vocabList;
+
+  updateUI(textList);
+});
 
 // Listeners
 toggleBtn.addEventListener("click", () => {
@@ -42,4 +64,10 @@ translationMethod.addEventListener("change", () => {
   browser.storage.local.set({
     translationMethodValue: translationMethod.value,
   });
+});
+clearVocabBtn.addEventListener("click", () => {
+  browser.storage.local.set({ vocabList: [] });
+  vocabList.innerHTML = "";
+
+  updateUI([]);
 });
