@@ -1,7 +1,7 @@
 import { map_dom } from "./dom.js";
 import { create_word_list } from "./vocab.js";
 import { replace_word_fragments } from "./replacer.js";
-import { STORAGE_KEYS, get_storage } from "./storage.js";
+import { STORAGE_KEYS, get_storage } from "../storage.js";
 
 function batch_text(text_list, batch_size) {
   let batches = [];

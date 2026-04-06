@@ -1,4 +1,3 @@
-import { GOOGLE_API_KEY } from "../../config.js";
 import { fetch_from_google, process_from_google } from "../background/fetch.js";
 import { STORAGE_KEYS, get_storage } from "../storage.js";
 
