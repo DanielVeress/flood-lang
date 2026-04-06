@@ -25,7 +25,7 @@ function updateUI(textList) {
       const li = document.createElement("li");
 
       const span = document.createElement("span");
-      span.textContent = `${item.original} - ${item.translation}`;
+      span.textContent = `${item.original_word} - ${item.translated_word}`;
 
       const delButton = document.createElement("button");
       delButton.textContent = "X";

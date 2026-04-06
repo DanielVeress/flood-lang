@@ -5,11 +5,13 @@ export function create_word_list(node_list, proba) {
   let node_info = [];
 
   node_list.forEach((node) => {
-    const words = node.textContent.split(" ");
-    words.forEach((word, idx) => {
-      if (Math.random() < proba) {
-        word_list.push(word);
-        node_info.push({ node, wordIndex: idx, allWords: words });
+    const tokens = node.textContent.split(/(\s+)/);
+
+    tokens.forEach((token, idx) => {
+      const isWordSlot = idx % 2 === 0;
+      if (isWordSlot && token.length > 0 && Math.random() < proba) {
+        word_list.push(token);
+        node_info.push({ node, tokenIndex: idx, allTokens: tokens });
       }
     });
   });

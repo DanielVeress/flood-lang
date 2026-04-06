@@ -10,7 +10,7 @@ export async function get_storage() {
   return await browser.storage.local.get({
     percentageSliderValue: "10",
     translationScopeValue: "word",
-    targetLangValue: "es",
+    targetLangValue: "sv",
     translationMethodValue: "google",
     vocabList: [],
   });
