@@ -11,8 +11,7 @@
     {
       "matches": ["<all_urls>"],
       "js": ["src/content/index.js"],
-      "css": ["src/content/content.css"],
-      "type": "module"
+      "css": ["src/content/content.css"]
     }
   ],
   "background": {
