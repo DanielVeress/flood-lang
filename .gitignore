@@ -1,2 +1,4 @@
 CLAUDE.md
 config.js
+/dist
+/node_modules

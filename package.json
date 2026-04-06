@@ -1,0 +1,24 @@
+{
+  "name": "flood_lang",
+  "version": "0.1.1",
+  "description": "FloodLang was created to flood every website you look at with the language you want to learn. My hope with this project is to create a small extension that helps with expanding your vocabulary.",
+  "main": "config.js",
+  "scripts": {
+    "build": "esbuild src/content/index.js --bundle --outfile=dist/content.js --platform=browser --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielVeress/flood-lang.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DanielVeress/flood-lang/issues"
+  },
+  "homepage": "https://github.com/DanielVeress/flood-lang#readme",
+  "devDependencies": {
+    "esbuild": "^0.28.0"
+  }
+}
