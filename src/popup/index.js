@@ -1,3 +1,5 @@
+import { STORAGE_KEYS, get_storage, set_storage } from "./storage.js";
+
 const percentageSlider = document.getElementById("percentage-slider");
 const percentageDisplay = document.getElementById("percentage-display");
 const translationScope = document.getElementById("translation-scope");
@@ -6,21 +8,13 @@ const translationMethod = document.getElementById("translation-method");
 const vocabList = document.getElementById("vocab-list");
 const clearVocabBtn = document.getElementById("clear-vocab");
 
-// Load from storage
-browser.storage.local
-  .get({
-    percentageSliderValue: "10",
-    translationScopeValue: "word",
-    targetLangValue: "es",
-    translationMethodValue: "google",
-  })
-  .then((result) => {
-    percentageSlider.value = result.percentageSliderValue;
-    percentageDisplay.textContent = `${percentageSlider.value}%`;
-    translationScope.value = result.translationScopeValue;
-    targetLang.value = result.targetLangValue;
-    translationMethod.value = result.translationMethodValue;
-  });
+// Load from storage, when clicked
+const storage = await get_storage();
+percentageSlider.value = storage[STORAGE_KEYS.PERCENTAGE_SLIDER];
+percentageDisplay.textContent = `${percentageSlider.value}%`;
+translationScope.value = storage[STORAGE_KEYS.TRANSLATION_SCOPE];
+targetLang.value = storage[STORAGE_KEYS.TARGET_LANG];
+translationMethod.value = storage[STORAGE_KEYS.TRANSLATION_METHOD];
 
 function updateUI(textList) {
   vocabList.innerHTML = "";
@@ -55,30 +49,27 @@ function updateUI(textList) {
 
 // Load vocab list
 document.addEventListener("DOMContentLoaded", async () => {
-  const data = await browser.storage.local.get({ vocabList: [] });
-  const textList = data.vocabList;
-
+  const storage = await get_storage();
+  const textList = storage[STORAGE_KEYS.VOCAB_LIST];
   updateUI(textList);
 });
 
 // Listeners
 percentageSlider.addEventListener("input", () => {
   percentageDisplay.textContent = `${percentageSlider.value}%`;
-  browser.storage.local.set({ percentageSliderValue: percentageSlider.value });
+  set_storage(STORAGE_KEYS.PERCENTAGE_SLIDER, percentageSlider.value);
 });
 translationScope.addEventListener("change", () => {
-  browser.storage.local.set({ translationScopeValue: translationScope.value });
+  set_storage(STORAGE_KEYS.TRANSLATION_SCOPE, translationScope.value);
 });
 targetLang.addEventListener("change", () => {
-  browser.storage.local.set({ targetLangValue: targetLang.value });
+  set_storage(STORAGE_KEYS.TARGET_LANG, targetLang.value);
 });
 translationMethod.addEventListener("change", () => {
-  browser.storage.local.set({
-    translationMethodValue: translationMethod.value,
-  });
+  set_storage(STORAGE_KEYS.TRANSLATION_METHOD, translationMethod.value);
 });
 clearVocabBtn.addEventListener("click", () => {
-  browser.storage.local.set({ vocabList: [] });
+  set_storage(STORAGE_KEYS.VOCAB_LIST, []);
   vocabList.innerHTML = "";
 
   updateUI([]);
