@@ -1,4 +1,4 @@
-import { STORAGE_KEYS, get_storage, set_storage } from "./storage.js";
+import { STORAGE_KEYS, get_storage, set_storage } from "../storage.js";
 
 const percentageSlider = document.getElementById("percentage-slider");
 const percentageDisplay = document.getElementById("percentage-display");
@@ -8,7 +8,6 @@ const translationMethod = document.getElementById("translation-method");
 const vocabList = document.getElementById("vocab-list");
 const clearVocabBtn = document.getElementById("clear-vocab");
 
-// Load from storage, when clicked
 const storage = await get_storage();
 percentageSlider.value = storage[STORAGE_KEYS.PERCENTAGE_SLIDER];
 percentageDisplay.textContent = `${percentageSlider.value}%`;
@@ -34,7 +33,7 @@ function updateUI(textList) {
         const index = textList.indexOf(item);
         if (index > -1) {
           textList.splice(index, 1);
-          browser.storage.local.set({ vocabList: textList });
+          set_storage(STORAGE_KEYS.VOCAB_LIST, textList);
           li.remove();
           updateUI(textList);
         }
@@ -47,12 +46,7 @@ function updateUI(textList) {
   }
 }
 
-// Load vocab list
-document.addEventListener("DOMContentLoaded", async () => {
-  const storage = await get_storage();
-  const textList = storage[STORAGE_KEYS.VOCAB_LIST];
-  updateUI(textList);
-});
+updateUI(storage[STORAGE_KEYS.VOCAB_LIST]);
 
 // Listeners
 percentageSlider.addEventListener("input", () => {

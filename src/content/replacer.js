@@ -1,5 +1,4 @@
-import { get_storage, set_storage, STORAGE_KEYS } from "../storage";
-import { save_vocab } from "./vocab";
+import { save_vocab } from "./vocab.js";
 
 export function replace_word_fragments(translated_word_list, node_info) {
   const nodeMap = new Map();
@@ -16,14 +15,12 @@ export function replace_word_fragments(translated_word_list, node_info) {
     allWords.forEach((word, idx) => {
       if (replacements.has(idx)) {
         const span = document.createElement("span");
+        span.classList.add("vocab-word");
         span.textContent = replacements.get(idx);
-        span.style.color = "red";
         span.dataset.original = word;
         span.title = word;
-        span.addEventListener("mouseenter", async () => {
-          const original_word = span.dataset.original;
-          const translated_word = span.textContent;
-          save_vocab(original_word, translated_word);
+        span.addEventListener("mouseenter", () => {
+          save_vocab(span.dataset.original, span.textContent);
         });
         fragment.appendChild(span);
       } else {

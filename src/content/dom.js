@@ -1,10 +1,9 @@
-const ignored_nodes = ["SCRIPT", "NOSCRIPT", "STYLE", "CITE"];
-const treeWalker = document.createTreeWalker(
-  document.body,
-  NodeFilter.SHOW_TEXT,
-);
-
 export function map_dom() {
+  const ignored_nodes = ["SCRIPT", "NOSCRIPT", "STYLE", "CITE"];
+  const treeWalker = document.createTreeWalker(
+    document.body,
+    NodeFilter.SHOW_TEXT,
+  );
   let node_list = [];
 
   while (treeWalker.nextNode()) {

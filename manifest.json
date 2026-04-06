@@ -3,6 +3,7 @@
   "name": "FloodLang",
   "version": "0.1.1",
   "permissions": ["storage"],
+  "host_permissions": ["https://translation.googleapis.com/*"],
   "action": {
     "default_popup": "src/popup/popup.html"
   },
@@ -10,6 +11,7 @@
     {
       "matches": ["<all_urls>"],
       "js": ["src/content/index.js"],
+      "css": ["src/content/content.css"],
       "type": "module"
     }
   ],

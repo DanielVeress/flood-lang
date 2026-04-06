@@ -1,4 +1,4 @@
-import { get_storage, set_storage, STORAGE_KEYS } from "../storage";
+import { get_storage, set_storage, STORAGE_KEYS } from "../storage.js";
 
 export function create_word_list(node_list, proba) {
   let word_list = [];
