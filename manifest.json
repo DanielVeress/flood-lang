@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "FloodLang",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "permissions": ["storage"],
   "action": {
     "default_popup": "popup/popup.html"
@@ -9,11 +9,11 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "js": ["content/index.js"]
     }
   ],
   "background": {
-    "scripts": ["background.js"],
+    "scripts": ["background/index.js"],
     "type": "module"
   }
 }
